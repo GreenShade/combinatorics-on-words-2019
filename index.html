@@ -1,0 +1,19 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+<body>
+  <div id="app">
+    <!-- <app-letter v-for="letter in letters" 
+                v-bind:letter="letter.letter"
+                v-bind:separator="letter.separator"
+                v-bind:key="letter.id"></app-letter> -->
+    <!-- <app-text v-bind:lettersorseparators="letters"></app-text> -->
+    <p v-if="isInProgress">{{currentPlayer.name}} to move</p>
+    <p v-if="!isInProgress">{{winner}} wins!</p>
+    <app-text v-bind:moves="state.moves"/>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

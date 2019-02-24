@@ -1,0 +1,14 @@
+#app {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%)
+}
+
+.letter {
+  font-size: 24px;
+}
+
+.remove {
+  color: red;
+}
