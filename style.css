@@ -12,3 +12,18 @@
 .remove {
   color: red;
 }
+
+label {
+  display: inline-block;
+  width: 110px;
+  text-align: right;
+  padding-right: 10px;
+}
+
+select {
+  width: 50%
+}
+
+button {
+  width: 100%
+}

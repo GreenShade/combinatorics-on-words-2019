@@ -9,9 +9,30 @@
                 v-bind:separator="letter.separator"
                 v-bind:key="letter.id"></app-letter> -->
     <!-- <app-text v-bind:lettersorseparators="letters"></app-text> -->
-    <p v-if="isInProgress">{{currentPlayer.name}} to move</p>
-    <p v-if="!isInProgress">{{winner}} wins!</p>
-    <app-text v-bind:moves="state.moves"/>
+    <div v-if="appState == 'init'">
+      <label for="alphabet">Alphabet </label><input name="alphabet" v-model="rawConfig.alphabet" /><br />
+      <label for="maxMoves">Max moves </label><input name="maxMoves" type="number" v-model="rawConfig.maxMoves" /><br />
+      <label for="maxLength">Max length </label><input name="maxLength" type="number" v-model="rawConfig.maxLength" /><br />
+      <label for="delay">AI move delay </label><input name="delay" type="number" v-model="rawConfig.delay" /><br />
+      <label for="strategy1">Player 1 strategy </label>
+      <select name="strategy1" v-model="rawConfig.firstPlayerType">
+        <option>human</option>
+        <option>ai</option>
+      </select>
+      </br>
+      <label for="strategy2">Player 2 strategy </label>
+      <select name="strategy2" v-model="rawConfig.secondPlayerType">
+          <option>human</option>
+          <option>ai</option>
+        </select>
+        </br>
+      <button @click="startGame">Play</button>
+    </div>
+    <div v-if="appState == 'playing'">
+      <p v-if="isInProgress">{{currentPlayer.name}} to move</p>
+      <p v-if="!isInProgress">{{winner}} wins!</p>
+      <app-text v-bind:moves="state.moves"/>
+    </div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script src="main.js"></script>

@@ -105,19 +105,30 @@ function updateState(state, move) {
 const vm = new Vue({
   el: "#app",
   data: {
+    appState: "init",
     state: {
       moves: []
     },
-    config: {
-      alphabet: "abc".split(""),
+    rawConfig: {
+      alphabet: "abc",
       maxMoves: 500,
       maxLength: 100,
-      delay: 10,
-      firstPlayer: playerDefinition("ai", "Player 1"),
-      secondPlayer: playerDefinition("ai", "Player 2")
+      delay: 500,
+      firstPlayerType: "human",
+      secondPlayerType: "human"
     }
   },
   computed: {
+    config: function() {
+      return {
+        alphabet: this.rawConfig.alphabet.split(""),
+        maxMoves: this.rawConfig.maxMoves,
+        maxLength: this.rawConfig.maxLength,
+        delay: this.rawConfig.delay,
+        firstPlayer: playerDefinition(this.rawConfig.firstPlayerType, "Player 1"),
+        secondPlayer: playerDefinition(this.rawConfig.secondPlayerType, "Player 2")
+      }
+    },
     currentPlayer: function() {
       if (this.state.moves.length % 2 == 0) 
         return this.config.firstPlayer;
@@ -137,8 +148,9 @@ const vm = new Vue({
   mounted: function() {
     const vm = this;
     
-    vm.nextPlayer();
     window.addEventListener("keyup", function(event) {
+      if (vm.appState != "playing") return;
+
       const key = event.key.toLowerCase();
       if (key.length == 1 && vm.config.alphabet.indexOf(key) != -1) {
         vm.humanMove(key);
@@ -163,6 +175,10 @@ const vm = new Vue({
       if (this.currentPlayer.type != "human") {
         setTimeout(() => vm.aiMove(), vm.config.delay);
       }
+    },
+    startGame: function() {
+      this.appState = "playing";
+      this.nextPlayer();
     }
   }
 });
