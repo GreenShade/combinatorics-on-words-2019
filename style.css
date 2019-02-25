@@ -1,29 +1,98 @@
-#app {
+@import 'https://fonts.googleapis.com/css?family=Oswald';
+
+body {
+  font-family: "Oswald", sans-serif;
+  background: rgba(108, 122, 137, 0.5);
+}
+
+#game {
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%)
+  transform: translate(-50%, -50%);
 }
 
 .letter {
-  font-size: 24px;
+  font-size: 60px;
 }
 
 .remove {
-  color: red;
+  color: #cc2222;
 }
 
+/* settings */
 label {
+  box-sizing: border-box;
   display: inline-block;
-  width: 110px;
+  width: 50%;
   text-align: right;
+  margin-bottom: 10px;
   padding-right: 10px;
 }
 
-select {
-  width: 50%
+.settings input {
+  font-family: "Oswald", sans-serif;
+  font-size: 20px;
+  background: transparent;
+  border: solid black 1px;
+  width: 50%;
 }
 
-button {
-  width: 100%
+.settings select {
+  font-family: "Oswald", sans-serif;
+  font-size: 20px;
+  background: transparent;
+  border: solid black 1px;
+  width: calc(50% - 10px);
+  box-sizing: border-box;
+}
+
+.settings button {
+  font-family: "Oswald", sans-serif;
+  font-size: 20px;
+  width: 100%;
+  background: rgba(108, 122, 137, 0.5);
+  border: none;
+}
+
+.settings {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+}
+/* settings */
+
+.progress {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  left: 0;
+  top: 0;
+  font-size: 60px;
+}
+
+.blinking{
+  animation:blinkingText 1.3s infinite;
+}
+
+@keyframes blinkingText {
+  0%   { opacity: 1; }
+  50%  { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.cog {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 40px;
+  font-size: 48px;
+  z-index: 1000;
+}
+
+.wrapped {
+  overflow: hidden;
+  width: 100%;
 }

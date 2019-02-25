@@ -8,12 +8,13 @@ Vue.component("app-letter", {
 Vue.component("app-text", {
   props: ["moves"],
   template: `
-    <div>
+    <div class="wrapped">
       <app-letter v-for="(move, index) in moves" 
                   v-if="move.state != 'hide'" 
                   v-bind:key="index" 
                   v-bind:value="move.key" 
                   v-bind:state="move.state" />
+      <span class="blinking letter">_</span>
     </div>
   `
 });
@@ -178,7 +179,12 @@ const vm = new Vue({
     },
     startGame: function() {
       this.appState = "playing";
+      // todo: more control over state
+      this.state.moves = [];
       this.nextPlayer();
+    },
+    settings: function() {
+      this.appState = "init";
     }
   }
 });

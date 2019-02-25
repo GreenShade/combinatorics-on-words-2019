@@ -1,15 +1,12 @@
 <html>
   <head>
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
 <body>
   <div id="app">
-    <!-- <app-letter v-for="letter in letters" 
-                v-bind:letter="letter.letter"
-                v-bind:separator="letter.separator"
-                v-bind:key="letter.id"></app-letter> -->
-    <!-- <app-text v-bind:lettersorseparators="letters"></app-text> -->
-    <div v-if="appState == 'init'">
+    <i class="fa fa-cog fa-5x cog" @click="settings"></i>
+    <div class="settings" v-if="appState == 'init'">
       <label for="alphabet">Alphabet </label><input name="alphabet" v-model="rawConfig.alphabet" /><br />
       <label for="maxMoves">Max moves </label><input name="maxMoves" type="number" v-model="rawConfig.maxMoves" /><br />
       <label for="maxLength">Max length </label><input name="maxLength" type="number" v-model="rawConfig.maxLength" /><br />
@@ -29,9 +26,11 @@
       <button @click="startGame">Play</button>
     </div>
     <div v-if="appState == 'playing'">
-      <p v-if="isInProgress">{{currentPlayer.name}} to move</p>
-      <p v-if="!isInProgress">{{winner}} wins!</p>
-      <app-text v-bind:moves="state.moves"/>
+      <p class="progress" v-if="isInProgress">{{currentPlayer.name}} to move</p>
+      <p class="progress" v-if="!isInProgress">{{winner}} wins!</p>
+      <div id="game">
+        <app-text v-bind:moves="state.moves"/>
+      </div>
     </div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
