@@ -47,6 +47,7 @@ export default {
       this.currentPlayer = 1;
       this.resetChosen();
 
+      this.$emit("currentLength", Math.floor(this.word.length / 2));
       this.verify();
 
       if (this.config.player1Strategy === "ai") {
@@ -95,8 +96,6 @@ export default {
       return result;
     },
     reset: function() {
-      const config = this.props;
-
       this.currentPlayer = 1;
       this.word = initWord();
       this.resetChosen();
