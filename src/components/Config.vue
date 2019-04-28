@@ -25,7 +25,50 @@ export default {
   props: ["config"],
   methods: {
     startGame: function() {
-      this.$emit("startGame", this.config);
+      if (this.isValid()) {
+        this.$emit("startGame", this.config);
+      }
+    },
+    isValid: function() {
+      const alphabet = this.validateAlphabet();
+      const maxLength = this.validateMaxLength();
+      const delay = this.validateDelay();
+      return alphabet && maxLength && delay;
+    },
+    validateAlphabet: function() {
+      const {alphabet} = this.config;
+      
+      if (alphabet === "") {
+        return this.error("Alphabet cannot be empty");
+      } else if (!alphabet.match(/^[a-zA-Z0-9]*$/)) {
+        return this.error("Alphabet must contain only numbers and letters");        
+      } else if (alphabet.length !== new Set(alphabet.split("")).size) {
+        return this.error("Alphabet cannot contain duplicates");
+      }
+
+      return this.success();
+    },
+    validateMaxLength: function() {
+      return this.validateInteger("Max length", this.config.maxLength, 1);
+    },
+    validateDelay: function() {
+      return this.validateInteger("Move delay", this.config.delay, 0);
+    },
+    validateInteger: function(name, value, min, max) {
+      if (min > value) {
+        return this.error(`${name} must be greater than ${min}`);
+      }
+      if (max < value) {
+        return this.error(`${name} must be less than ${max}`);
+      }
+      return this.success();
+    },
+    error: function(text) {
+      this.$toasted.show(text, {type: "error", duration: 5000})
+      return false;
+    },
+    success: function() {
+      return true;
     }
   }
 }

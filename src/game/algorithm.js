@@ -1,6 +1,4 @@
 export default function algoXXX(word) {
-  console.log(word);
-
   function matches(start, lengthX) {
     const part1 = word.substring(start + 0 * lengthX, start + 1 * lengthX);
     const part2 = word.substring(start + 1 * lengthX, start + 2 * lengthX);
